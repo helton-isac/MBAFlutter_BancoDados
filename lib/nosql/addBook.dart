@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_aula2_banco/nosql/model/book.dart';
-import 'package:flutter_app_aula2_banco/sqlite/model/person.dart';
 
 class AddBook extends StatelessWidget {
 
