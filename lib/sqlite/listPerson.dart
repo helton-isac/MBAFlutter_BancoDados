@@ -66,6 +66,18 @@ class _ListPersonState extends State<ListPerson> {
     });
   }
 
+  deletePerson(int index) {
+    _database.delete(
+      'person',
+      where: "id = ?", //sql injection - hackers
+      whereArgs: [personsList[index].id],
+    ).then((value) {
+      setState(() {
+        personsList.removeAt(index);
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -111,7 +123,9 @@ class _ListPersonState extends State<ListPerson> {
           leading: Text("${personsList[index].id}"),
           title: Text(personsList[index].firstName),
           subtitle: Text("${personsList[index].lastName}, ${personsList[index].address}"),
-          onLongPress: (){ },
+          onLongPress: (){
+            deletePerson(index);
+          },
         ),
       ),
     );
