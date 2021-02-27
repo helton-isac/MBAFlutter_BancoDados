@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_aula2_banco/sqlite/addPerson.dart';
 import 'package:flutter_app_aula2_banco/sqlite/model/person.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
