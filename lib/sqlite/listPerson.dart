@@ -52,6 +52,19 @@ class _ListPersonState extends State<ListPerson> {
     setState(() {});
   }
 
+  insertPerson(Person person) {
+    _database.insert(
+      'person',
+      person.toMap(),
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    ).then((value) {
+      person.id = value;
+      setState(() {
+        personsList.add(person);
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,7 +73,18 @@ class _ListPersonState extends State<ListPerson> {
         actions: <Widget>[
           if (_database != null) IconButton(
             icon: Icon(Icons.add),
-            onPressed: (){ },
+            onPressed: (){
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => AddPerson()
+                  )
+              ).then((newPerson) {
+                if (newPerson != null){
+                  insertPerson(newPerson);
+                }
+              });
+            },
           )
         ],
       ),
